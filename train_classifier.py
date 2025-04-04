@@ -6,10 +6,12 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 
-data_dict = pickle.load(open('./data.pickle', 'rb'))
+data_dic = pickle.load(open('./data.pickle', 'rb'))
 
-data = np.asarray(data_dict['data'])
-labels = np.asarray(data_dict['labels'])
+filtered = [(d, l) for d, l in zip(data_dic['data'], data_dic['labels']) if len(d) == len(data_dic['data'][0])]
+data, labels = zip(*filtered)
+data = np.array(data)
+labels = np.array(labels)
 
 x_train, x_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, shuffle=True, stratify=labels)
 

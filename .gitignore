@@ -1,2 +1,4 @@
 ._*
-/data
+./data
+data.pickle
+model.p

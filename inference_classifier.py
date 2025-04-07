@@ -1,8 +1,14 @@
+import time
 import pickle
 import cv2
 import mediapipe as mp
 import numpy as np
+import pyttsx3
+from collections import deque
 
+engine = pyttsx3.init()
+engine.setProperty('rate', 150) 
+engine.setProperty('volume', 1.0)
 
 model_dict = pickle.load(open('./model.p', 'rb'))
 model = model_dict['model']
@@ -21,6 +27,12 @@ labels_dict = {
     18: 'S', 19: 'T', 20: 'U', 21: 'V', 22: 'W', 23: 'X',
     24: 'Y', 25: 'Z'
 }
+
+last_spoken = None 
+last_spoken_time = 0 
+cooldown_time = 1.5
+
+prediction_buffer = deque(maxlen=10)
 
 while True:
     ret, frame = cap.read()
@@ -60,6 +72,16 @@ while True:
 
             prediction = model.predict([np.asarray(data_aux)])
             predicted_character = labels_dict.get(int(prediction[0]), "Unknown")
+
+            prediction_buffer.append(predicted_character)
+
+            if prediction_buffer.count(predicted_character) > 7: 
+                current_time = time.time()
+                if predicted_character != last_spoken and (current_time - last_spoken_time) > cooldown_time:
+                    engine.say(predicted_character)
+                    engine.runAndWait()
+                    last_spoken = predicted_character
+                    last_spoken_time = current_time
 
             x1 = int(min_x * W) - 10
             y1 = int(min_y * H) - 10

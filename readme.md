@@ -18,7 +18,7 @@ This project is based on a [YouTube tutorial by Computer Vision Eng](https://you
 ## How It Works
 1. **Data Collection**:
    - Use `collect_images.py` to collect ASL data for each letter.
-   - The script captures sequences of frames for each letter and saves them as `.npy` files.
+   - The script captures sequences of frames for each letter and saves them as `.jpg` files.
 
 2. **Dataset Creation**:
    - Use `create_dataset.py` to process the collected data.

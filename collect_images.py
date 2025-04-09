@@ -30,7 +30,6 @@ for j in range(number_of_classes):
     counter = 0
     while counter < dataset_size:
         ret, frame = cap.read()
-        frame = cv2.flip(frame, 1)
 
         cv2.imshow('frame', frame)
         cv2.waitKey(25)

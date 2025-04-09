@@ -20,7 +20,6 @@ for j in range(number_of_classes):
     done = False
     while True:
         ret, frame = cap.read()
-        frame = cv2.flip(frame, 1)
 
         cv2.putText(frame, 'Press "Q" to begin!', (100, 50), cv2.FONT_HERSHEY_TRIPLEX, 1.3, (0, 0, 0), 3,
                     cv2.LINE_AA)

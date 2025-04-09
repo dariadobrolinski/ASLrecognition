@@ -39,7 +39,6 @@ while True:
     if not ret:
         break
 
-    frame = cv2.flip(frame, 1)
     H, W, _ = frame.shape
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = hands.process(frame_rgb)

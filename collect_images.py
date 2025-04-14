@@ -21,7 +21,7 @@ for j in range(number_of_classes):
     while True:
         ret, frame = cap.read()
 
-        cv2.putText(frame, 'Press "Q" to begin!', (100, 50), cv2.FONT_HERSHEY_TRIPLEX, 1.3, (0, 0, 0), 3,
+        cv2.putText(frame, 'Press "Q" to begin!', (100, 50), cv2.FONT_HERSHEY_TRIPLEX, 1.3, (255, 105, 180), 3,
                     cv2.LINE_AA)
         cv2.imshow('frame', frame)
         if cv2.waitKey(25) == ord('q'):
